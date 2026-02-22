@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Threads | Traditional Sarees</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS resets for a clean slate */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif; /* Clean font for reading */
+            color: #333;
+            background-color: #fafafa; /* Very soft off-white */
+        }
+
+        /* --- NAVIGATION BAR --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            background-color: #fff;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+
+        nav a {
+            margin-left: 2rem;
+            text-decoration: none;
+            color: #555;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #d4af37; /* Subtle gold hover effect */
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5% 5%;
+            height: 80vh;
+            background-color: #fff;
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-right: 5rem;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 2.5rem;
+            max-width: 80%;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: #1a1a1a;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid #1a1a1a;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #fff;
+            color: #1a1a1a;
+        }
+
+        .hero-image {
+            flex: 1;
+            height: 100%;
+            /* Using a high-quality placeholder image for now */
+            background-image: url('https://images.unsplash.com/photo-1610189013629-8af7eb6b5df9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">Royal Threads</a>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Collections</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Authentic Indian Heritage</h1>
+                <p>Discover our exquisite collection of handcrafted sarees, where traditional artistry meets contemporary grace. Each piece tells a story of elegance.</p>
+                <a href="gallery.html" class="cta-button">Shop Collection</a>
+            </div>
+            <div class="hero-image"></div>
+        </section>
+    </main>
+
+</body>
+</html>
