@@ -111,6 +111,37 @@
             background-position: center;
             border-radius: 4px;
         }
+
+        /* This code only runs on screens smaller than 768px (Phones) */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column; /* Stacks the logo and nav vertically */
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .logo {
+        font-size: 1.5rem; /* Makes the logo slightly smaller for mobile */
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        gap: 15px; /* Adds even spacing between links */
+    }
+
+    nav a {
+        margin-left: 0; /* Removes the large left margin we used for desktop */
+        font-size: 0.8rem;
+    }
+
+    /* Adjust the main title size so it doesn't wrap awkwardly */
+    .gallery-title, h1 {
+        font-size: 2rem !important;
+        margin-bottom: 1.5rem;
+    }
+}
     </style>
 </head>
 <body>
