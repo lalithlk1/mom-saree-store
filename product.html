@@ -33,13 +33,19 @@
         accessToken: 'zq4KTlyONPdhOJVm_ELPHU_JWGoayp1GAv79XOw61dM'
     });
 
-    async function loadProduct() {
+async function loadProduct() {
         const container = document.getElementById('product-content');
         try {
             const entry = await client.getEntry(productId);
             const f = entry.fields;
             
-            // 1. Build image gallery (Looping through your array)
+            // This is the new formatter
+            const formattedPrice = new Intl.NumberFormat('en-IN', {
+                style: 'currency',
+                currency: 'INR',
+                maximumFractionDigits: 0
+            }).format(f.productPrice);
+
             let thumbHtml = '';
             if (f.productImage && f.productImage.length > 0) {
                 f.productImage.forEach(img => {
@@ -47,7 +53,6 @@
                 });
             }
 
-            // 2. Injecting the content into the page
             container.innerHTML = `
                 <div class="image-gallery" style="flex:1; min-width:300px;">
                     <img id="main" src="https:${f.productImage[0].fields.file.url}" class="main-img" style="width:100%; border-radius:8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
@@ -55,10 +60,12 @@
                 </div>
                 <div class="details" style="flex:1; min-width:300px; padding: 0 20px;">
                     <h1 style="font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:10px;">${f.sareeName}</h1>
-                    <p class="price" style="font-size:1.8rem; color:#b12704; font-weight:bold; margin-bottom:20px;">₹${f.productPrice}</p>
+                    
+                    <p class="price" style="font-size:1.8rem; color:#b12704; font-weight:bold; margin-bottom:20px;">${formattedPrice}</p>
+                    
                     <div class="description" style="line-height:1.7; color:#444; margin-bottom:30px; white-space: pre-wrap;">${f.description || 'No description available.'}</div>
                     
-                    <a href="https://wa.me/919884003568?text=I%20want%20to%20buy%20the%20${encodeURIComponent(f.sareeName)}" 
+                    <a href="https://wa.me/919884003568?text=I%20want%20to%20buy%20the%20${encodeURIComponent(f.sareeName)} (${formattedPrice})" 
                        class="buy-btn" 
                        style="background:#25D366; color:white; padding:15px 40px; text-decoration:none; font-weight:bold; border-radius:50px; display:inline-block; text-align:center;">
                        Order on WhatsApp

@@ -84,33 +84,43 @@
                 grid.innerHTML = ''; 
 
                 response.items.forEach(item => {
-                    const fields = item.fields;
-                    
-                    const name = fields.sareeName;      
-                    const price = fields.productPrice;  
-                    const images = fields.productImage; 
-                    
-                    const imageUrl = images && images[0] 
-                                     ? images[0].fields.file.url 
-                                     : 'https://via.placeholder.com/400x600?text=No+Image';
+                const fields = item.fields;
+                
+                const name = fields.sareeName;      
+                const rawPrice = fields.productPrice; // We keep the raw number for logic
+                const images = fields.productImage; 
+                
+                // 1. CREATE THE FORMATTED PRICE HERE
+                const formattedPrice = new Intl.NumberFormat('en-IN', {
+                    style: 'currency',
+                    currency: 'INR',
+                    maximumFractionDigits: 0
+                }).format(rawPrice);
 
-                    const message = `Hi! I want to buy the ${name} (₹${price})`;
-                    const encodedMessage = encodeURIComponent(message);
-                    const whatsappUrl = `https://wa.me/${MOM_WHATSAPP}?text=${encodedMessage}`;
+                const imageUrl = images && images[0] 
+                                 ? images[0].fields.file.url 
+                                 : 'https://via.placeholder.com/400x600?text=No+Image';
 
-                    const productCard = `
-                        <div class="product-card" onclick="location.href='product.html?id=${item.sys.id}'" style="cursor: pointer;">
-                            <img src="https:${imageUrl}" class="product-image" alt="${name}">
-                            <h2 class="product-name">${name}</h2>
-                            <p class="product-price">₹${price}</p>
-                            <a href="${whatsappUrl}" target="_blank" class="whatsapp-btn">
-                                Order on WhatsApp
-                            </a>
-                        </div>
-                    `;
-                    
-                    grid.innerHTML += productCard;
-                });
+                // 2. USE FORMATTED PRICE IN WHATSAPP MESSAGE
+                const message = `Hi! I want to buy the ${name} (${formattedPrice})`;
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/${MOM_WHATSAPP}?text=${encodedMessage}`;
+
+                const productCard = `
+                    <div class="product-card" onclick="location.href='product.html?id=${item.sys.id}'" style="cursor: pointer;">
+                        <img src="https:${imageUrl}" class="product-image" alt="${name}">
+                        <h2 class="product-name">${name}</h2>
+                        
+                        <p class="product-price">${formattedPrice}</p>
+                        
+                        <a href="${whatsappUrl}" target="_blank" class="whatsapp-btn">
+                            Order on WhatsApp
+                        </a>
+                    </div>
+                `;
+                
+                grid.innerHTML += productCard;
+            });
 
             } catch (error) {
                 console.error("Contentful Error:", error);
